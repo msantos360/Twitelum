@@ -9,8 +9,20 @@ import Tweet from './components/Tweet'
 class App extends Component {
 
     constructor(){
-        super();
-        this.state = { novoTweet: "" }
+            super();
+            this.state = { novoTweet: "",
+            tweets: []
+        }
+    }
+
+    adicionaTweet = (infosDoEvento) => {
+        infosDoEvento.preventDefault();
+        if(this.state.novoTweet.length > 0) {
+            this.setState({
+                tweets: [this.state.novoTweet, ...this.state.tweets],
+                novoTweet: ""
+            });
+        }
     }
 
   render() {
@@ -22,7 +34,7 @@ class App extends Component {
         <div className="container">
             <Dashboard>
                 <Widget>
-                    <form className="novoTweet">
+                    <form className="novoTweet" onSubmit={ this.adicionaTweet }>
                         <div className="novoTweet__editorArea">
                             <span className={`novoTweet__status}
                                 ${
