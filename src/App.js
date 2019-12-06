@@ -17,6 +17,7 @@ class App extends Component {
 
     adicionaTweet = (infosDoEvento) => {
         infosDoEvento.preventDefault();
+        
         if(this.state.novoTweet.length > 0) {
             this.setState({
                 tweets: [this.state.novoTweet, ...this.state.tweets],
@@ -29,7 +30,7 @@ class App extends Component {
     return (
       <Fragment>
         <Cabecalho>
-            <NavMenu usuario="@omariosouto" />
+            <NavMenu usuario="@msantos" />
         </Cabecalho>
         <div className="container">
             <Dashboard>
@@ -66,8 +67,13 @@ class App extends Component {
             <Dashboard posicao="centro">
                 <Widget>
                     <div className="tweetsArea">
-                        <Tweet />
-                    </div>
+                    { this.state.tweets.map(
+                        (tweetInfo, index) => {
+                            return <Tweet key={ tweetInfo + index }
+                            texto={ tweetInfo } />
+                        }
+                    )}
+                </div>
                 </Widget>
             </Dashboard>
         </div>
