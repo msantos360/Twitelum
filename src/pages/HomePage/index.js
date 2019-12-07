@@ -1,12 +1,12 @@
 import React, { Component, Fragment } from 'react';
-import Cabecalho from './components/Cabecalho'
-import NavMenu from './components/NavMenu'
-import Dashboard from './components/Dashboard'
-import Widget from './components/Widget'
-import TrendsArea from './components/TrendsArea'
-import Tweet from './components/Tweet'
+import Cabecalho from '../../components/Cabecalho'
+import NavMenu from '../../components/NavMenu'
+import Dashboard from '../../components/Dashboard'
+import Widget from '../../components/Widget'
+import TrendsArea from '../../components/TrendsArea'
+import Tweet from '../../components/Tweet'
 
-class App extends Component {
+class HomePage extends Component {
 
     constructor(){
             super();
@@ -24,6 +24,20 @@ class App extends Component {
                 novoTweet: ""
             });
         }
+    }
+
+    mapTweets = () => {
+        const { tweets } = this.state
+
+        if( tweets.length ){
+            return tweets.map((tweetInfo, index) => <Tweet
+              key={ tweetInfo + index }
+              texto={ tweetInfo }  
+            />)
+        }
+
+        return <p>Post um novo tweet!</p>
+
     }
 
   render() {
@@ -82,4 +96,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default HomePage;
