@@ -2,23 +2,25 @@ import React from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
+import NotFoundPage from "./pages/NotFoundPage";
 
 const PrivateRoute = ({ component, Component, ...props}) => {
+    
     const isUserAuthenticated = () => Boolean(localStorage.getItem('TOKEN'))
 
     if (isUserAuthenticated()){
         return <Component {...props}/>
+    } else{
+        return <Redirect to="/login" /> 
     }
-
-    return <Redirect to="/login" />
+    
 }
-
 const Roteamento = () => {
     return(
         <Switch>
             <Route path="/" component={HomePage} exact />
             <Route path="/login" component={LoginPage} />
-            <Route component={NotFoundPage} />
+            <Route component={ NotFoundPage }/>
         </Switch>
     )
 }
@@ -47,10 +49,10 @@ const Roteamento = () => {
 class Roteamento extends React.Component{        
         return (
             <Switch>
-                <Route path="/" component={Home} exact />
+                <PrivateRoute path="/" component={HomePage} exact />
                 <Route path="/login" component={LoginPage} />
             </Switch>
-        );
+        )
     }
 }*/
 
